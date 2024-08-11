@@ -1,0 +1,23 @@
+#!/bin/bash
+
+#checking the resource status in AWS
+
+set -x
+
+#list EC2 instances
+aws ec2 describe-instances
+
+#list S3 Buckets
+aws s3 ls
+
+#list lambda functions
+
+aws lambda list-functions
+
+
+#list  iam users
+
+aws iam list-users
+
+
+
