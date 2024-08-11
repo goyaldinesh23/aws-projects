@@ -5,7 +5,10 @@
 set -x
 
 #list EC2 instances
-aws ec2 describe-instances
+aws ec2 describe-instances | jq '.Reservations[].Instances[].InstanceId'
+
+aws ec2 describe-instances | jq '.Reservations[].Instances[] | "Image ID:\(.ImageId) Instance ID:\(.InstanceId)"'
+
 
 #list S3 Buckets
 aws s3 ls
@@ -18,6 +21,29 @@ aws lambda list-functions
 #list  iam users
 
 aws iam list-users
+
+
+
+
+
+
+####OUTPUT
+
++ aws ec2 describe-instances
++ jq '.Reservations[].Instances[].InstanceId'
+"i-07754df989154cf5d"
++ aws ec2 describe-instances
++ jq '.Reservations[].Instances[] | "Image ID:\(.ImageId) Instance ID:\(.InstanceId)"'
+"Image ID:ami-0ad21ae1d0696ad58 Instance ID:i-07754df989154cf5d"
++ aws s3 ls
++ aws lambda list-functions
+{
+    "Functions": []
+}
++ aws iam list-users
+{
+    "Users": []
+}
 
 
 
